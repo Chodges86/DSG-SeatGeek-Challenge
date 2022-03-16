@@ -45,6 +45,7 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
+        print("button Tapped")
         self.dismiss(animated: true, completion: nil)
         
     }
