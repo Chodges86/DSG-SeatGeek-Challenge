@@ -11,6 +11,7 @@ class TableViewCell: UITableViewCell {
 
     
   
+    @IBOutlet weak var heart: UIImageView!
     @IBOutlet weak var eventView: UIView!
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var title: UILabel!

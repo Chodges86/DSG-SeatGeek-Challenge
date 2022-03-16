@@ -20,6 +20,7 @@ struct Event: Codable {
     let short_title: String
     var venue: Venue
     var performers: [Performers]
+    let id: Int
     
     
 }

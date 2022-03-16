@@ -7,6 +7,8 @@
 
 import UIKit
 
+var favoriteEvents = [Int]()
+
 class TableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -14,6 +16,15 @@ class TableViewController: UITableViewController {
     var model = DataModel()
     var eventArray: [Event] = []
     var selectedEvent: Event?
+    
+    let defaults = UserDefaults.standard
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     
     
     override func viewDidLoad() {
@@ -29,6 +40,9 @@ class TableViewController: UITableViewController {
         // Setup appearance of search bar
         searchBar.searchTextField.leftView?.tintColor = .systemGray // mag glass color
         searchBar.backgroundImage = UIImage() // Get rid of border around search bar
+        
+        // Load favorites from UserDefaults
+        favoriteEvents = defaults.array(forKey: "Favorites") as? [Int] ?? []
         
         // Kick off the API call
         model.getData()
@@ -61,6 +75,13 @@ class TableViewController: UITableViewController {
             cell.thumbnail.image = safePic
         } else {
             cell.thumbnail.image = UIImage(systemName: "questionmark")
+        }
+        
+        // Display heart if event is a favorite
+        if favoriteEvents.contains(eventArray[indexPath.row].id) {
+            cell.heart.alpha = 1
+        } else {
+            cell.heart.alpha = 0
         }
 
 
